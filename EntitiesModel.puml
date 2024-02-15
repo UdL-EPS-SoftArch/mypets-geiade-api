@@ -62,6 +62,16 @@ class Adoptions {
     dateOfAdoption: DateTime
 }
 
+class Role {
+    id: Integer
+    name: String
+}
+
+class Permission {
+    id: Integer
+    name: String
+}
+
 
 User "1" --right-- "*" Resource : owner <
 Location "1" -> "1" Shelter : has>
@@ -72,4 +82,8 @@ Schedule "*" -> "1" Shelter :available >
 
 Adoptions "1" -> "1" Pet :adopted >
 Adoptions "1" -> "1" User :adopt <
+
+User "1" -> "1" Role
+Role "1" -> "*" Permission
+
 @enduml
