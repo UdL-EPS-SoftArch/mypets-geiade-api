@@ -14,10 +14,12 @@ class UriEntity {
 abstract class Pet{
   id: Integer
   name: String
-  dateOfBith: String
+  dateOfBirth: String
   isAdopted: Boolean
   colour: String
   size: Integer
+  chip: Integer
+  sex: String
 }
 class Dog extends Pet {
     barkingLevel: Integer
@@ -43,7 +45,7 @@ class Location {
  latitude: Float
  longitude: Float
  province: String
- municipality: String
+ city: String
  postalCode: String
 }
 
@@ -83,7 +85,7 @@ Schedule "*" -> "1" Shelter :available >
 Adoptions "1" -> "1" Pet :adopted >
 Adoptions "1" -> "1" User :adopt <
 
-User "1" -> "1" Role
+User "1" -> "*" Role
 Role "1" -> "*" Permission
 
 @enduml
