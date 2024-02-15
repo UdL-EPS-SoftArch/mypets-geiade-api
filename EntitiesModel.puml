@@ -70,6 +70,6 @@ Shelter "1" -> "*" Pet : has >
 Shelter "1" -> "1" ShelterCertificate : has >
 Schedule "*" -> "1" Shelter :available >
 
-Adoptions "1" -> "1" Dog :adopted >
+Adoptions "1" -> "1" Pet :adopted >
 Adoptions "1" -> "1" User :adopt <
 @enduml
