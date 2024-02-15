@@ -11,12 +11,20 @@ class User extends UriEntity implements UserDetails {
 class UriEntity {
   uri : String
 }
-
-class Dog implements Pet {
+interface Pet{
   id: Integer
   name: String
   dateOfBith: String
   isAdopted: Boolean
+  colour: String
+  size: Integer
+}
+class Dog implements Pet {
+    barkingLevel: Integer
+}
+
+class Cat implements Pet {
+
 }
 
 class Shelter {
