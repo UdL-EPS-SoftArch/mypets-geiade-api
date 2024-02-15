@@ -44,12 +44,6 @@ class ShelterCertificate {
   expirationDate: DateTime
 }
 
-class SocialNetworks {
-  id: Integer
-  instagram: String
-  twitter: String
-}
-
 class Schedule {
     id: Integer
     startTime: Time
@@ -60,22 +54,10 @@ class Adoptions {
     dateOfAdoption: DateTime
 }
 
-class DogCharacter{
-
-}
-
-class Breed{
- id: Integer
- scientificName: name
- commonName: name
-}
-
-
 
 User "1" --right-- "*" Resource : owner <
 Location "1" -> "1" Shelter : has>
 Shelter "1" -> "*" User : < pertain
-Shelter "1" -> "*" SocialNetworks : < has
 Shelter "1" -> "*" Pet : has >
 Shelter "1" -> "1" ShelterCertificate : has >
 Schedule "*" -> "1" Shelter :available >
