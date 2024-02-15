@@ -1,15 +1,85 @@
 @startuml
-
 class User extends UriEntity implements UserDetails {
   username : String
   password : String
   email : String
+  dni: String
+  dateOfBirth: String
 }
+
 
 class UriEntity {
   uri : String
 }
 
-User "1" --right-- "*" Resource : owner <
+class Dog implements Pet {
+  id: Integer
+  name: String
+  dateOfBith: String
+  isAdopted: Boolean
+}
 
+class Shelter {
+  id: Integer
+  name: String
+  email: String
+  mobile : String
+  createdAt: DateTime
+  updatedAt: DateTime
+  isActive: Boolean
+}
+
+class Location {
+ id: Integer
+ address: String
+ latitude: Float
+ longitude: Float
+ province: String
+ municipality: String
+ postalCode: String
+}
+
+class ShelterCertificate {
+  id: String
+  expirationDate: DateTime
+}
+
+class SocialNetworks {
+  id: Integer
+  instagram: String
+  twitter: String
+}
+
+class Schedule {
+    id: Integer
+    startTime: Time
+    endTime: Time
+}
+
+class Adoptions {
+    dateOfAdoption: DateTime
+}
+
+class DogCharacter{
+
+}
+
+class Breed{
+ id: Integer
+ scientificName: name
+ commonName: name
+}
+
+
+
+User "1" --right-- "*" Resource : owner <
+Location "1" -> "1" Shelter : has>
+Shelter "1" -> "*" User : < pertain
+Shelter "1" -> "*" SocialNetworks : < has
+Shelter "1" -> "*" Pet : has >
+Shelter "1" -> "1" ShelterCertificate : has >
+Schedule "*" -> "1" Shelter :available >
+
+Adoptions "1" -> "1" Dog :adopted >
+Adoptions "1" -> "1" User :adopt <
 @enduml
