@@ -82,6 +82,7 @@ Location "1" -> "1" Shelter : has>
 Shelter "1" -> "*" User : < pertain
 Shelter "1" -> "*" Pet : has >
 Shelter "1" -> "1" ShelterCertificate : has >
+Shelter "1" -- "*" Adoptions
 Schedule "*" -> "1" Shelter :available >
 
 Adoptions "1" -> "1" Pet :adopted >
