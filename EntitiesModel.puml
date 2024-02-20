@@ -11,14 +11,14 @@ class User extends UriEntity implements UserDetails {
 class UriEntity {
   uri : String
 }
-abstract class Pet{
+abstract class Pet extends UriEntity {
   id: Integer
   name: String
-  dateOfBirth: String
+  dateOfBirth: Date
   isAdopted: Boolean
   colour: String
   size: Integer
-  chip: Integer
+  chip: String
   sex: String
   race: String
   dangerous: Boolean
@@ -31,7 +31,7 @@ class Cat extends Pet {
     meowingLevel: Integer
 }
 
-class Shelter {
+class Shelter extends UriEntity {
   id: Integer
   name: String
   email: String
