@@ -16,7 +16,7 @@ public class Cat extends Pet {
     private Integer meowingLevel;
 
     @Override
-    public String getId() {
+    public Long getId() {
         return super.getId();
     }
 

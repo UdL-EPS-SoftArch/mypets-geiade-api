@@ -15,10 +15,10 @@ import java.time.LocalDate;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Pet extends UriEntity<String> {
+public abstract class Pet extends UriEntity<Long> {
 
     @Id
-    private String id;
+    private Long id;
 
     @NotBlank
     private String name;

@@ -16,7 +16,7 @@ public class Dog extends Pet {
     private Integer barkingLevel;
 
     @Override
-    public String getId() {
+    public Long getId() {
         return super.getId();
     }
 }

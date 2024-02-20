@@ -12,7 +12,7 @@ class UriEntity {
   uri : String
 }
 abstract class Pet extends UriEntity {
-  id: String
+  id: Long
   name: String
   dateOfBirth: Date
   isAdopted: Boolean
@@ -32,7 +32,7 @@ class Cat extends Pet {
 }
 
 class Shelter extends UriEntity {
-  id: Integer
+  id: Long
   name: String
   email: String
   mobile : String
@@ -42,7 +42,7 @@ class Shelter extends UriEntity {
 }
 
 class Location {
- id: String
+ id: Long
  address: String
  latitude: Float
  longitude: Float
@@ -52,12 +52,12 @@ class Location {
 }
 
 class ShelterCertificate {
-  id: String
+  id: Long
   expirationDate: DateTime
 }
 
 class Schedule {
-    id: String
+    id: Long
     startTime: Time
     endTime: Time
 }
@@ -67,12 +67,12 @@ class Adoptions {
 }
 
 class Role {
-    id: String
+    id: Long
     name: String
 }
 
 class Permission {
-    id: String
+    id: Long
     name: String
 }
 
