@@ -20,13 +20,15 @@ abstract class Pet{
   size: Integer
   chip: Integer
   sex: String
+  race: String
+  dangerous: Boolean
 }
 class Dog extends Pet {
     barkingLevel: Integer
 }
 
 class Cat extends Pet {
-
+    meowingLevel: Integer
 }
 
 class Shelter {
