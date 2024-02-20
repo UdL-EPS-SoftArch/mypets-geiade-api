@@ -85,7 +85,7 @@ Schedule "*" -> "1" Shelter :available >
 Adoptions "1" -> "1" Pet :adopted >
 Adoptions "1" -> "1" User :adopt <
 
-User "1" -> "*" Role
-Role "1" -> "*" Permission
+User "*" -> "*" Role
+Role "*" -> "*" Permission
 
 @enduml
