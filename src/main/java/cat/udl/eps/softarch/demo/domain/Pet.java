@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public abstract class Pet extends UriEntity<String> {
 
     @Id
-    private Long id;
+    private String id;
 
     @NotBlank
     private String name;
