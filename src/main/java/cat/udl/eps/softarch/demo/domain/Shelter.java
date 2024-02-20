@@ -15,10 +15,10 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Shelter extends UriEntity<String> {
+public class Shelter extends UriEntity<Long> {
 
     @Id
-    private String id;
+    private Long id;
 
     @NotBlank
     private String name;
