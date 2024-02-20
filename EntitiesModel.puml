@@ -31,7 +31,7 @@ class Cat extends Pet {
     meowingLevel: Integer
 }
 
-class Shelter {
+class Shelter extends UriEntity{
   id: Integer
   name: String
   email: String
