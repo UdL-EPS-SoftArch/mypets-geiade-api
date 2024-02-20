@@ -12,7 +12,7 @@ import lombok.Data;
 public class Location {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @NotNull
