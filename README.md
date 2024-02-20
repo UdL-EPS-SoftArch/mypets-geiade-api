@@ -16,12 +16,12 @@ Template for a Spring Boot project including Spring REST, HATEOAS, JPA, etc. Add
 
 ## Features per Stakeholder
 
-| USER                | ADMIN                |
-|---------------------|----------------------|
-| Register            |                      |
-| Login               |                      |
-| Logout              |                      |
-|                     |                      |
+| USER                | ADMIN                 | SHELTER VOLUNTEER |
+|---------------------|-----------------------|-------------------|
+| Register            |                       | Create animal     |
+| Login               |                       | Invite User       |
+| Logout              |                       |Validate adoption|
+|                     |                       |Edit shelter profile|
 
 ## Entities Model
 

@@ -1,15 +1,93 @@
 @startuml
-
 class User extends UriEntity implements UserDetails {
   username : String
   password : String
   email : String
+  dni: String
+  dateOfBirth: String
 }
+
 
 class UriEntity {
   uri : String
 }
+abstract class Pet{
+  id: Integer
+  name: String
+  dateOfBirth: String
+  isAdopted: Boolean
+  colour: String
+  size: Integer
+  chip: Integer
+  sex: String
+  race: String
+  dangerous: Boolean
+}
+class Dog extends Pet {
+    barkingLevel: Integer
+}
+
+class Cat extends Pet {
+    meowingLevel: Integer
+}
+
+class Shelter {
+  id: Integer
+  name: String
+  email: String
+  mobile : String
+  createdAt: DateTime
+  updatedAt: DateTime
+  isActive: Boolean
+}
+
+class Location {
+ id: Integer
+ address: String
+ latitude: Float
+ longitude: Float
+ province: String
+ city: String
+ postalCode: String
+}
+
+class ShelterCertificate {
+  id: String
+  expirationDate: DateTime
+}
+
+class Schedule {
+    id: Integer
+    startTime: Time
+    endTime: Time
+}
+
+class Adoptions {
+    dateOfAdoption: DateTime
+}
+
+class Role {
+    id: Integer
+    name: String
+}
+
+class Permission {
+    id: Integer
+    name: String
+}
+
 
 User "1" --right-- "*" Resource : owner <
+Location "1" -> "1" Shelter : has>
+Shelter "1" -> "*" User : < pertain
+Shelter "1" -> "*" Pet : has >
+Shelter "1" -> "1" ShelterCertificate : has >
+Schedule "*" -> "1" Shelter :available >
+
+Adoptions "1" -> "1" Pet :adopted >
+Adoptions "1" -> "1" User :adopt <
+
+User "*" -> "*" Role
+Role "*" -> "*" Permission
 
 @enduml
