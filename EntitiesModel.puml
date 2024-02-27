@@ -48,7 +48,7 @@ class Location {
  longitude: Float
  province: String
  city: String
- postalCode: String
+ postalCode: Integer
 }
 
 class ShelterCertificate {
