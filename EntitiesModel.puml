@@ -11,14 +11,14 @@ class User extends UriEntity implements UserDetails {
 class UriEntity {
   uri : String
 }
-abstract class Pet{
-  id: Integer
+abstract class Pet extends UriEntity {
+  id: Long
   name: String
-  dateOfBirth: String
+  dateOfBirth: Date
   isAdopted: Boolean
   colour: String
   size: Integer
-  chip: Integer
+  chip: String
   sex: String
   race: String
   dangerous: Boolean
@@ -31,8 +31,8 @@ class Cat extends Pet {
     meowingLevel: Integer
 }
 
-class Shelter extends UriEntity{
-  id: Integer
+class Shelter extends UriEntity {
+  id: Long
   name: String
   email: String
   mobile : String
@@ -42,7 +42,7 @@ class Shelter extends UriEntity{
 }
 
 class Location {
- id: Integer
+ id: Long
  address: String
  latitude: Float
  longitude: Float
@@ -52,12 +52,12 @@ class Location {
 }
 
 class ShelterCertificate {
-  id: String
+  id: Long
   expirationDate: DateTime
 }
 
 class Schedule {
-    id: Integer
+    id: Long
     startTime: Time
     endTime: Time
 }
@@ -67,12 +67,12 @@ class Adoptions {
 }
 
 class Role {
-    id: Integer
+    id: Long
     name: String
 }
 
 class Permission {
-    id: Integer
+    id: Long
     name: String
 }
 
