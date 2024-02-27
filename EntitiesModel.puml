@@ -63,6 +63,7 @@ class Schedule {
 }
 
 class Adoptions {
+    id: Long
     dateOfAdoption: DateTime
 }
 
