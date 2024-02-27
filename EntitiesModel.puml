@@ -42,7 +42,7 @@ class Shelter {
 }
 
 class Location {
- id: Integer
+ id: Long
  address: String
  latitude: Float
  longitude: Float
