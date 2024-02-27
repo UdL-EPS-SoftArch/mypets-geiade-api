@@ -17,5 +17,5 @@ public class Permission {
 
     @NotNull
     @NotBlank
-    private String Permission;
+    private String name;
 }
