@@ -26,16 +26,13 @@ public class Adoptions {
 
     @OneToOne
     @NotNull
-    @NotBlank
     private User user;
 
     @OneToOne
     @NotNull
-    @NotBlank
     private Pet pet;
 
     @NotNull
-    @NotBlank
     private LocalDateTime dateOfAdoption;
 
     public Adoptions (User user, Pet pet) {
