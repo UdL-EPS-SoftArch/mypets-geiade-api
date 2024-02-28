@@ -2,6 +2,7 @@ package cat.udl.eps.softarch.demo.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
@@ -32,10 +33,10 @@ public class Shelter extends UriEntity<Long> {
     @Length(min=12, max=12)
     private String mobile;
 
-    @NotBlank
+    @NotNull
     private LocalDateTime createdAt;
 
-    @NotBlank
+    @NotNull
     private LocalDateTime updatedAt;
 
     @BooleanFlag
