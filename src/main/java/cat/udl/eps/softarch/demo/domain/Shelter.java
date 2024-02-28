@@ -1,11 +1,10 @@
 package cat.udl.eps.softarch.demo.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jdk.jfr.BooleanFlag;
@@ -18,6 +17,21 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Shelter extends UriEntity<Long> {
+
+    @ManyToOne
+    @NotNull
+    @JsonIdentityReference(alwaysAsId = true)
+    private User user;
+
+    @ManyToOne
+    @NotNull
+    @JsonIdentityReference(alwaysAsId = true)
+    private Pet pet;
+
+    @OneToOne
+    @NotNull
+    @JsonIdentityReference(alwaysAsId = true)
+    private ShelterCertificate shelterCertificate;
 
     @Id
     private Long id;
