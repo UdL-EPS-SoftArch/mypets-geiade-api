@@ -35,9 +35,4 @@ public class Adoptions {
     @NotNull
     private LocalDateTime dateOfAdoption;
 
-    public Adoptions (User user, Pet pet) {
-        this.user = user;
-        this.pet = pet;
-        this.dateOfAdoption = LocalDateTime.now();
-    }
 }
