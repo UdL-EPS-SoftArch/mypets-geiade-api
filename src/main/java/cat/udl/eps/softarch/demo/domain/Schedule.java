@@ -21,11 +21,9 @@ public class Schedule {
     private int Id;
 
     @NotNull
-    @NotBlank
     private Time startTime;
 
     @NotNull
-    @NotBlank
     private Time endTime;
 
 }
