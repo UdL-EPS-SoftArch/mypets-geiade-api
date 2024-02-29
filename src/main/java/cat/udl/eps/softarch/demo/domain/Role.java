@@ -24,7 +24,7 @@ public class Role extends UriEntity<String> {
     @NotBlank
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany
     private Set<User> users;
 
     public Role(String id) {
