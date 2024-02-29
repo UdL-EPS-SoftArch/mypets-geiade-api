@@ -1,5 +1,6 @@
 package cat.udl.eps.softarch.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.*;
@@ -7,6 +8,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
@@ -17,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "DemoUser") //Avoid collision with system table User
@@ -75,4 +78,19 @@ public class User extends UriEntity<String> implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
+
+	@OneToOne
+	@NotNull
+	@JsonIdentityReference(alwaysAsId = true)
+	private Adoptions adoptions;
+
+	@ManyToOne
+	@NotNull
+	@JsonIdentityReference(alwaysAsId = true)
+	private Shelter shelter;
+
+	@ManyToMany
+	@NotNull
+	@JsonIdentityReference(alwaysAsId = true)
+	private Set<Role> role;
 }
