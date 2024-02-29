@@ -1,11 +1,9 @@
 package cat.udl.eps.softarch.demo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,10 +14,12 @@ import java.util.Set;
 @Data
 @JsonIdentityReference(alwaysAsId = true)
 @EqualsAndHashCode(callSuper = true)
-public class Role extends UriEntity<String> {
+public class Role extends UriEntity<Long> {
 
     @Id
-    private String id;
+    @GeneratedValue
+    @NotNull
+    private Long id;
 
     @NotBlank
     private String name;
@@ -27,18 +27,18 @@ public class Role extends UriEntity<String> {
     @ManyToMany
     private Set<User> users;
 
-    public Role(String id) {
+    public Role(Long id) {
         this.id = id;
     }
 
     public Role() {
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
