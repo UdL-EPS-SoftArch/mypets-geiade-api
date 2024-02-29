@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 
 @Setter
@@ -34,5 +35,9 @@ public class Adoptions {
 
     @NotNull
     private LocalDateTime dateOfAdoption;
+
+    public Adoptions() {
+        this.dateOfAdoption = LocalDateTime.now(ZoneOffset.UTC);
+    }
 
 }
