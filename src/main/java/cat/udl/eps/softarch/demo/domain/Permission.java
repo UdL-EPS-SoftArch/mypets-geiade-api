@@ -11,6 +11,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Setter
 @Getter
@@ -28,6 +30,6 @@ public class Permission {
 
     @NotNull
     @ManyToMany
-    private Role role;
+    private Set<Role> role;
 
 }
