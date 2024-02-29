@@ -88,9 +88,9 @@ public class User extends UriEntity<String> implements UserDetails {
 	@NotNull
 	@JsonIdentityReference(alwaysAsId = true)
 	private Shelter shelter;
-
+/*
 	@ManyToMany
 	@NotNull
 	@JsonIdentityReference(alwaysAsId = true)
-	private Set<Role> role;
+	private Set<Role> role;*/
 }
