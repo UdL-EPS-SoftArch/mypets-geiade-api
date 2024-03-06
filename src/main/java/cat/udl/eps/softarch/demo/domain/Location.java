@@ -12,6 +12,10 @@ import lombok.EqualsAndHashCode;
 @Entity
 @EqualsAndHashCode(callSuper = false)
 public class Location {
+    @OneToOne
+    @NotNull
+    @JsonIdentityReference(alwaysAsId = true)
+    private Shelter shelter;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

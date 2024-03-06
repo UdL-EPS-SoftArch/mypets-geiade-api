@@ -1,8 +1,12 @@
 package cat.udl.eps.softarch.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -38,5 +42,15 @@ public abstract class Pet extends UriEntity<Long> {
     private String race;
 
     private boolean dangerous;
+
+    @OneToOne
+    @NotNull
+    @JsonIdentityReference(alwaysAsId = true)
+    private Adoptions adoptions;
+    
+    @ManyToOne
+    @NotNull
+    @JsonIdentityReference(alwaysAsId = true)
+    private Shelter shelter;
 
 }
