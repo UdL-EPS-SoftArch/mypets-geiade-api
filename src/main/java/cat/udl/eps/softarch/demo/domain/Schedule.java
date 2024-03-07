@@ -2,10 +2,7 @@ package cat.udl.eps.softarch.demo.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,7 +15,7 @@ import java.sql.Time;
 public class Schedule {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int Id;
 
     @NotNull
