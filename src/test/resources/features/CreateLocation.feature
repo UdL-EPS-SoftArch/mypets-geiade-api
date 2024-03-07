@@ -45,3 +45,15 @@ Feature: Create Location
       | postalCode    | 25183            |
     Then The response code is 400
     And There is 0 Location created
+
+  Scenario: Attempt to create a Location without being logged in
+    Given I'm not logged in
+    When I create a new Location with the following details:
+      | address       | Major Street 3 |
+      | latitude      | 40.7128        |
+      | longitude     | -74.0060       |
+      | province      | Lleida         |
+      | city          | Seròs          |
+      | postalCode    | 25183          |
+    Then The response code is 401
+    And There is 0 Location created
