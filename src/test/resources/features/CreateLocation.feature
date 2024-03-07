@@ -33,3 +33,15 @@ Feature: Create Location
       | postalCode    | 25183              |
     Then The response code is 409
     And There is 0 Location created
+
+  Scenario: Attempt to create a Location with address blank and latitude null
+    Given I can login with username "username" and password "password"
+    When I create a new Location with the following details:
+      | address       |                  |
+      | latitude      | null             |
+      | longitude     | -74.0060         |
+      | province      | Lleida           |
+      | city          | Seròs            |
+      | postalCode    | 25183            |
+    Then The response code is 400
+    And There is 0 Location created
