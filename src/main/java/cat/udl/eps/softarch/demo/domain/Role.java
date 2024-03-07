@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "Role") // Nombre de la tabla en la base de datos
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Role extends UriEntity<String> {
+public class Role extends UriEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
