@@ -3,7 +3,9 @@ package cat.udl.eps.softarch.demo.repository;
 import cat.udl.eps.softarch.demo.domain.Shelter;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-public interface ShelterRepository extends CrudRepository<Shelter, String>, PagingAndSortingRepository<Shelter, String> {
-    Shelter findName(String name);
+@RepositoryRestResource
+public interface ShelterRepository extends CrudRepository<Shelter, Long>, PagingAndSortingRepository<Shelter, Long> {
+
 }

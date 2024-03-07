@@ -33,6 +33,7 @@ public class Shelter extends UriEntity<Long> {
     private ShelterCertificate shelterCertificate;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank
