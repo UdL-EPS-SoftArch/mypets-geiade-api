@@ -34,11 +34,15 @@ public class RegisterShelterStepDefs {
         shelter.setName(name);
         shelter.setEmail(email);
         shelter.setMobile(mobile);
-        shelter.setActive(true);
+        shelter.setActive(isActive);
+        shelter.setCreatedAt(java.time.LocalDateTime.now());
+        shelter.setUpdatedAt(java.time.LocalDateTime.now());
 
 
-        stepDefs.result = stepDefs.mockMvc.perform(post("/shelters")
+        stepDefs.result = stepDefs.mockMvc.perform(
+                post("/shelters")
                         .contentType(MediaType.APPLICATION_JSON)
+                        .content(stepDefs.mapper.writeValueAsString(shelter))
                         .characterEncoding(StandardCharsets.UTF_8)
                         .accept(MediaType.APPLICATION_JSON)
                         .with(AuthenticationStepDefs.authenticate()))
@@ -63,10 +67,18 @@ public class RegisterShelterStepDefs {
     }
 
 
-    @Given("There is a registered shelter with name \"([^\"]*)\", email \"([^\"]*)\", mobile \"([^\"]*)\" and isActive {booleanValue}")
-    public void thereIsARegisteredShelterWithNameEmailMobileAndIsActiveTrue(String name, String email, String mobile, boolean isActive) {
-        Shelter shelter = shelterRepository.findByName(name);
-        assertThat(shelter).isNotNull();
+    @Given("^There is a registered shelter with name \"([^\"]*)\", email \"([^\"]*)\", mobile \"([^\"]*)\"$")
+    public void thereIsARegisteredShelterWithNameEmailMobileAndIsActiveTrue(String name, String email, String mobile) {
+        Shelter shelter = new Shelter();
+        shelter.setName(name);
+        shelter.setEmail(email);
+        shelter.setMobile(mobile);
+        shelter.setCreatedAt(java.time.LocalDateTime.now());
+        shelter.setUpdatedAt(java.time.LocalDateTime.now());
+        shelterRepository.save(shelter);
+
+        Shelter shelter_find = shelterRepository.findByName(name);
+        assertThat(shelter_find).isNotNull();
     }
 }
 

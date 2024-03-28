@@ -18,17 +18,14 @@ import java.time.LocalDateTime;
 public class Shelter extends UriEntity<Long> {
 
     @ManyToOne
-    @NotNull
     @JsonIdentityReference(alwaysAsId = true)
     private User user;
 
     @ManyToOne
-    @NotNull
     @JsonIdentityReference(alwaysAsId = true)
     private Pet pet;
 
     @OneToOne
-    @NotNull
     @JsonIdentityReference(alwaysAsId = true)
     private ShelterCertificate shelterCertificate;
 
@@ -45,7 +42,7 @@ public class Shelter extends UriEntity<Long> {
     private String email;
 
     @NotBlank
-    @Pattern(regexp="(^$|[0-9]{11})")
+    @Pattern(regexp="(^[+]*[(]?[0-9]{1,4}[)]?[-\\s./0-9]*$)")
     private String mobile;
 
     @NotNull
