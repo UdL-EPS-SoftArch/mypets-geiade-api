@@ -2,6 +2,7 @@ package cat.udl.eps.softarch.demo.steps;
 
 
 import cat.udl.eps.softarch.demo.domain.Schedule;
+import cat.udl.eps.softarch.demo.domain.Shelter;
 import cat.udl.eps.softarch.demo.repository.ScheduleRepository;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
@@ -23,14 +24,24 @@ public class ScheduleStepDefs {
     private ScheduleRepository scheduleRepository;
 
     /*@Autowired
-    private ShelterRepository shelterRepository; */
+    private ShelterRepository shelterRepository; falta aprovar PR Shelter Test*/
     public static String newResourceUri;
 
     @When("I create a new schedule with startTime \"([^\"]*)\" and endTime \"([^\"]*)\" for shelter \"([^\"]*)\"$")
-    public void iCreateANewScheduledWithStartTimeAndEndTime(String startTime, String endTime) throws Throwable {
+    public void iCreateANewScheduledWithStartTimeAndEndTime(String startTime, String endTime, String shelter) throws Throwable {
         Schedule schedule = new Schedule();
-        schedule.setStartTime(Time.valueOf(startTime));
-        schedule.setEndTime(Time.valueOf(endTime));
+
+        int startTimeInt = Integer.parseInt(startTime.substring(0,2));
+        int endTimeInt = Integer.parseInt(endTime.substring(0,2));
+
+        if(startTimeInt > 24) startTime = null;
+        if(endTimeInt > 24) endTime = null;
+        if(startTimeInt >= endTimeInt) startTime = null;
+
+        schedule.setStartTime(startTime);
+        schedule.setEndTime(endTime);
+
+        //Shelter shelter1 = shelterRepository.getbyname... falta aprovar PR Shelter Test
 
         stepDefs.result = stepDefs.mockMvc.perform(
                         post("/schedules")

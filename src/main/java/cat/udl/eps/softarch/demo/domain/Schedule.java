@@ -19,13 +19,13 @@ public class Schedule {
     private long Id;
 
     @NotNull
-    private Time startTime;
+    private String startTime;
 
     @NotNull
-    private Time endTime;
+    private String endTime;
 
     @ManyToOne
-    @NotNull
+    //@NotNull
     @JsonIdentityReference(alwaysAsId = true)
     private Shelter shelter;
 }

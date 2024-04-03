@@ -16,24 +16,24 @@ Feature: Create Schedule
 
   Scenario: Create a new schedule with invalid startTime
     Given I can login with username "username" and password "password"
-    When I create a new schedule with startTime "25:00" and endTime "21:00" for shelter "shelter"
+    When I create a new schedule with startTime "25:00:00" and endTime "21:00:00" for shelter "shelter"
     Then The response code is 400
     And No schedule is created
 
   Scenario: Create a new schedule with invalid endTime
     Given I can login with username "username" and password "password"
-    When I create a new schedule with startTime "08:00" and endTime "30:00" for shelter "shelter"
+    When I create a new schedule with startTime "08:00:00" and endTime "30:00:00" for shelter "shelter"
     Then The response code is 400
     And No schedule is created
 
   Scenario: Try to create a schedule without logging in
     Given I'm not logged in
-    When I create a new schedule with startTime "08:00" and endTime "21:00" for shelter "shelter"
+    When I create a new schedule with startTime "08:00:00" and endTime "21:00:00" for shelter "shelter"
     Then The response code is 401
     And No schedule is created
 
   Scenario: Create a new schedule with startTime higher than endTime
     Given I can login with username "username" and password "password"
-    When I create a new schedule with startTime "10:00" and endTime "9:00" for shelter "shelter"
+    When I create a new schedule with startTime "10:00:00" and endTime "09:00:00" for shelter "shelter"
     Then The response code is 400
     And No schedule is created
