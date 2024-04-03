@@ -1,8 +1,6 @@
 package cat.udl.eps.softarch.demo.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,10 +9,11 @@ import lombok.EqualsAndHashCode;
 @Table(name = "Role") // Nombre de la tabla en la base de datos
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Role extends UriEntity<String> {
+public class Role extends UriEntity<Long> {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @NotBlank
     private String name;
