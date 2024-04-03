@@ -18,6 +18,7 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long Id;
 
+
     @NotNull
     private String startTime;
 
