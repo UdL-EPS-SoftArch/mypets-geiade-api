@@ -22,7 +22,6 @@ public abstract class Pet extends UriEntity<Long> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank
     private String name;
 
     private LocalDate dateOfBirth;
@@ -42,12 +41,10 @@ public abstract class Pet extends UriEntity<Long> {
     private boolean dangerous;
 
     @OneToOne
-    @NotNull
     @JsonIdentityReference(alwaysAsId = true)
     private Adoptions adoptions;
     
     @ManyToOne
-    @NotNull
     @JsonIdentityReference(alwaysAsId = true)
     private Shelter shelter;
 

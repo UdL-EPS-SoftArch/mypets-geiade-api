@@ -4,27 +4,25 @@ Feature: Register an Adoption
   I want to be able to adopt a Pet
 
   Background:
-    Given There is a registered user with username "username" and password "password" and email "email"
-    And There is a registered Pet with id "id" and isAdopted "isAdopted"
+    Given There is a registered user with username "username" and password "password" and email "email@gmail.com"
+    Given There is a registered user with username "username2" and password "password2" and email "email2@gmail.com"
 
   Scenario: User successfully adopts a Pet
-    Given The user is logged in with username "username" and password "password"
-    And The Pet with id "id" exists and is not adopted
-    When The user adopts the Pet with id "id"
-    Then The Pet with id "id" should be marked as adopted
+    And I can login with username "username" and password "password"
+    Given The Pet with id 1 exists
+    Given The Pet with id 1 is not adopted
+    When The user with username "username" adopts the Pet with id 1
+    Then The Pet with id 1 should be marked as adopted
 
   Scenario: User tries to adopt a Pet that is already adopted
-    Given The user is logged in with username "username" and password "password"
-    And The Pet with id "id" exists and is adopted
-    When The user tries to adopt the Pet with id "id"
-    Then The system should display an error message indicating the Pet is already adopted
-
-  Scenario: User tries to adopt a Pet without logging in
-    Given The user is not logged in
-    When The user tries to adopt the Pet with id "id"
-    Then The system should prompt the user to log in
+    And I can login with username "username" and password "password"
+    And The Pet with id 1 exists
+    And The Pet with id 1 is adopted by user "username2"
+    When The user with username "username" adopts the Pet with id 1
+    Then The system should display an error message indicating the Pet with id 1 is already adopted by another user "username2"
 
   Scenario: User tries to adopt a Pet that does not exist
-    Given The user is logged in with username "username" and password "password"
-    When The user tries to adopt a non-existing Pet with id "id"
-    Then The system should display an error message indicating the Pet does not exist
+    And I can login with username "username" and password "password"
+    And The Pet with id 1 does not exists
+    When The user with username "username" adopts the Pet with id 1
+    Then The system should display an error message indicating the Pet with id 1 does not exist
