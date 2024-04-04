@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.sql.Time;
+import java.time.ZonedDateTime;
 
 @Entity
 @Data
@@ -16,17 +17,13 @@ public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-<<<<<<<<< Temporary merge branch 1
-    private int Id;
-=========
     private long Id;
->>>>>>>>> Temporary merge branch 2
 
     @NotNull
-    private String startTime;
+    private ZonedDateTime startTime;
 
     @NotNull
-    private String endTime;
+    private ZonedDateTime endTime;
 
     @ManyToOne
     //@NotNull
