@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.sql.Time;
+import java.time.ZonedDateTime;
 
 @Entity
 @Data
@@ -19,10 +19,10 @@ public class Schedule {
     private long Id;
 
     @NotNull
-    private String startTime;
+    private ZonedDateTime startTime;
 
     @NotNull
-    private String endTime;
+    private ZonedDateTime endTime;
 
     @ManyToOne
     //@NotNull

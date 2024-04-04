@@ -2,7 +2,6 @@ package cat.udl.eps.softarch.demo.steps;
 
 
 import cat.udl.eps.softarch.demo.domain.Schedule;
-import cat.udl.eps.softarch.demo.domain.Shelter;
 import cat.udl.eps.softarch.demo.repository.ScheduleRepository;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
@@ -11,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
 import java.nio.charset.StandardCharsets;
-import java.sql.Time;
+import java.time.ZonedDateTime;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -31,16 +30,15 @@ public class ScheduleStepDefs {
     public void iCreateANewScheduledWithStartTimeAndEndTime(String startTime, String endTime, String shelter) throws Throwable {
         Schedule schedule = new Schedule();
 
-        int startTimeInt = Integer.parseInt(startTime.substring(0,2));
-        int endTimeInt = Integer.parseInt(endTime.substring(0,2));
 
-        if(startTimeInt > 24) startTime = null;
-        if(endTimeInt > 24) endTime = null;
-        if(startTimeInt >= endTimeInt) startTime = null;
+        ZonedDateTime start = ZonedDateTime.parse(startTime);
+        ZonedDateTime end = ZonedDateTime.parse(endTime);
 
-        schedule.setStartTime(startTime);
-        schedule.setEndTime(endTime);
-
+        if(start.compareTo(end) >= 0) schedule.setStartTime(null);
+        else {
+            schedule.setStartTime(start);
+            schedule.setEndTime(end);
+        }
         //Shelter shelter1 = shelterRepository.getbyname... falta aprovar PR Shelter Test
 
         stepDefs.result = stepDefs.mockMvc.perform(
