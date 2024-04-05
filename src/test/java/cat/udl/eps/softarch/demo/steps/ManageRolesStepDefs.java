@@ -13,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.mockito.Mockito.when;
 
 public class ManageRolesStepDefs {
 
@@ -24,17 +23,6 @@ public class ManageRolesStepDefs {
     private RoleRepository roleRepository;
 
     private Role createdRole;
-    private Role existingRole;
-
-    @Given("There is a registered user with username {string} and password {string} and email {string}")
-    public void thereIsARegisteredUserWithUsernameAndPasswordAndEmail(String username, String password, String email) {
-        // Simulate a registered user - not implemented for simplicity
-    }
-
-    @Given("I can login with username {string} and password {string}")
-    public void iCanLoginWithUsernameAndPassword(String username, String password) {
-        // Simulate login - not implemented for simplicity
-    }
 
     @When("^I create a role with name \"([^\"]*)\"$")
     public void iCreateARoleWithName(String roleName) throws Exception {
@@ -53,7 +41,27 @@ public class ManageRolesStepDefs {
                 .andDo(print());
     }
 
-    @When("^I update the role with name \"([^\"]*)\" to have name \"([^\"]*)\"$")
+    @Given("There is a role with name {string}")
+    public void thereIsARoleWithName(String roleName) {
+        Role role = new Role();
+        role.setName(roleName);
+
+        roleRepository.save(role);
+    }
+
+    @When("I retrieve the role with name {string}")
+    public void iRetrieveTheRoleWithName(String roleName) throws Exception {
+        Role role = roleRepository.findByName(roleName);
+
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        get("/roles/{id}", role.getId())
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+    }
+
+    @When("I update the role with name {string} to have name {string}")
     public void iUpdateTheRoleWithNameToHaveName(String oldName, String newName) throws Exception {
         Role role = roleRepository.findByName(oldName);
         role.setName(newName);
@@ -68,7 +76,7 @@ public class ManageRolesStepDefs {
                 .andDo(print());
     }
 
-    @When("^I delete the role with name \"([^\"]*)\"$")
+    @When("I delete the role with name {string}")
     public void iDeleteTheRoleWithName(String roleName) throws Exception {
         Role role = roleRepository.findByName(roleName);
 
@@ -80,23 +88,8 @@ public class ManageRolesStepDefs {
                 .andDo(print());
     }
 
-
-    @Then("^The response code is (\\d+)$")
+    @Then("The response code is {int}")
     public void theResponseCodeIs(int statusCode) throws Exception {
         stepDefs.result.andExpect(status().is(statusCode));
-    }
-
-    @Given("There is a role with name {string}")
-    public void thereIsARoleWithName(String roleName) {
-        existingRole = new Role();
-        existingRole.setName(roleName);
-
-        // Mocking the behavior of the repository to return the existing role
-        when(roleRepository.findByName(roleName)).thenReturn(existingRole);
-    }
-
-    @When("I retrieve the role with name {string}")
-    public void iRetrieveTheRoleWithName(String roleName) throws Exception {
-        // Implementation already exists in the RoleStepDefs class
     }
 }
