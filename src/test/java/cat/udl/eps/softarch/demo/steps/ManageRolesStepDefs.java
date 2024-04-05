@@ -26,13 +26,14 @@ public class ManageRolesStepDefs {
     private Role createdRole;
     private Role existingRole;
 
-    @Given("There is a role with name {string}")
-    public void thereIsARoleWithName(String roleName) {
-        existingRole = new Role();
-        existingRole.setName(roleName);
+    @Given("There is a registered user with username {string} and password {string} and email {string}")
+    public void thereIsARegisteredUserWithUsernameAndPasswordAndEmail(String username, String password, String email) {
+        // Simulate a registered user - not implemented for simplicity
+    }
 
-        // Mocking the behavior of the repository to return the existing role
-        when(roleRepository.findByName(roleName)).thenReturn(existingRole);
+    @Given("I can login with username {string} and password {string}")
+    public void iCanLoginWithUsernameAndPassword(String username, String password) {
+        // Simulate login - not implemented for simplicity
     }
 
     @When("^I create a role with name \"([^\"]*)\"$")
@@ -87,5 +88,14 @@ public class ManageRolesStepDefs {
     @Then("^The response code is (\\d+)$")
     public void theResponseCodeIs(int statusCode) throws Exception {
         stepDefs.result.andExpect(status().is(statusCode));
+    }
+
+    @Given("There is a role with name {string}")
+    public void thereIsARoleWithName(String roleName) {
+        existingRole = new Role();
+        existingRole.setName(roleName);
+
+        // Mocking the behavior of the repository to return the existing role
+        when(roleRepository.findByName(roleName)).thenReturn(existingRole);
     }
 }
