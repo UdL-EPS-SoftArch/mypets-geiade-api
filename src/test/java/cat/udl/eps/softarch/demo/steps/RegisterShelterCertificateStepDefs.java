@@ -30,11 +30,6 @@ public class RegisterShelterCertificateStepDefs {
 
     public static String newResourceUri;
 
-    @ParameterType(value = "true|True|TRUE|false|False|FALSE")
-    public Boolean booleanValue(String value) {
-        return Boolean.valueOf(value);
-    }
-
     @When("I register a new shelter certificate with id \"([^\"]*)\" for shelter with name \"([^\"]*)\"$")
     public void iRegisterANewShelterCertificateWithIdForShelterWithName(Long id, String shelterName) throws Exception {
         ShelterCertificate shelterCertificate = new ShelterCertificate();
