@@ -80,10 +80,6 @@ public class ManageRolesStepDefs {
                 .andDo(print());
     }
 
-    @When("I retrieve the role with name {string}")
-    public void iRetrieveTheRoleWithName(String roleName) throws Exception {
-        // Implementation already exists in the RoleStepDefs class
-    }
 
     @Then("^The response code is (\\d+)$")
     public void theResponseCodeIs(int statusCode) throws Exception {
@@ -97,5 +93,10 @@ public class ManageRolesStepDefs {
 
         // Mocking the behavior of the repository to return the existing role
         when(roleRepository.findByName(roleName)).thenReturn(existingRole);
+    }
+
+    @When("I retrieve the role with name {string}")
+    public void iRetrieveTheRoleWithName(String roleName) throws Exception {
+        // Implementation already exists in the RoleStepDefs class
     }
 }
