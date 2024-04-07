@@ -1,8 +1,9 @@
 package cat.udl.eps.softarch.demo.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,10 +16,15 @@ import java.time.LocalDate;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Pet extends UriEntity<Long> {
+public class Pet extends UriEntity<Long> {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(unique=true)
+    @NotBlank
+    private String chip;
 
     @NotBlank
     private String name;
@@ -31,12 +37,19 @@ public abstract class Pet extends UriEntity<Long> {
 
     private Integer size;
 
-    private String chip;
-
     private String sex;
 
     private String race;
 
-    private boolean dangerous;
+    private boolean isDangerous;
+
+    @OneToOne
+    @JsonIdentityReference(alwaysAsId = true)
+    private Adoptions adoptions;
+    
+    @ManyToOne
+    @NotNull
+    @JsonIdentityReference(alwaysAsId = true)
+    private Shelter shelter;
 
 }
