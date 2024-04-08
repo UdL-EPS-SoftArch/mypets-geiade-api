@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.sql.Time;
+import java.time.ZonedDateTime;
 
 @Entity
 @Data
@@ -16,16 +17,16 @@ public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private long Id;
 
     @NotNull
-    private Time startTime;
+    private ZonedDateTime startTime;
 
     @NotNull
-    private Time endTime;
+    private ZonedDateTime endTime;
 
     @ManyToOne
-    @NotNull
+    //@NotNull
     @JsonIdentityReference(alwaysAsId = true)
     private Shelter shelter;
 }
