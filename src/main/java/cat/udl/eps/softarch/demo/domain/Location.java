@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class Location {
     @OneToOne
-    @NotNull
+    /*@NotNull*/
     @JsonIdentityReference(alwaysAsId = true)
     private Shelter shelter;
 
@@ -24,10 +24,8 @@ public class Location {
     @NotBlank
     private String address;
 
-    @NotNull
     private Float latitude;
 
-    @NotNull
     private Float longitude;
 
     @NotBlank
