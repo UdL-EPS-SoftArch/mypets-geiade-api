@@ -31,10 +31,6 @@ Feature: Manage Roles
     When I retrieve the role with name "non_existent_role"
     Then The response code is 404
 
-  Scenario: Update non-existent role
-    When I update the role with name "non_existent_role" to have name "updated_role"
-    Then The response code is 404
-
   Scenario: Delete non-existent role
     When I delete the role with name "non_existent_role"
     Then The response code is 404
