@@ -24,7 +24,8 @@ Feature: Manage Roles
   Scenario: Delete existing role
     Given There is a role with name "role_to_delete"
     When I delete the role with name "role_to_delete"
-    Then The response code is 204
+    Then The response code is 200
+    And There are 0 roles
 
   Scenario: Get non-existent role details
     When I retrieve the role with name "non_existent_role"

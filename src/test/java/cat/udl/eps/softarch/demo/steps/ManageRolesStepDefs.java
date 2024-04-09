@@ -2,6 +2,7 @@ package cat.udl.eps.softarch.demo.steps;
 
 import cat.udl.eps.softarch.demo.domain.Role;
 import cat.udl.eps.softarch.demo.repository.RoleRepository;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -29,8 +30,6 @@ public class ManageRolesStepDefs {
         Role role = new Role();
         role.setName(roleName);
 
-        createdRole = roleRepository.save(role);
-
         stepDefs.result = stepDefs.mockMvc.perform(
                         post("/roles")
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -54,7 +53,7 @@ public class ManageRolesStepDefs {
         Role role = roleRepository.findByName(roleName);
 
         stepDefs.result = stepDefs.mockMvc.perform(
-                        get("/roles/{id}", role.getId())
+                        get("/roles/{id}", (role!=null ? role.getId() : 0))
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
@@ -63,13 +62,14 @@ public class ManageRolesStepDefs {
 
     @When("I update the role with name {string} to have name {string}")
     public void iUpdateTheRoleWithNameToHaveName(String oldName, String newName) throws Exception {
-        Role role = roleRepository.findByName(oldName);
-        role.setName(newName);
+        Role oldRole = roleRepository.findByName(oldName);
+        Role newRole = new Role();
+        newRole.setName(newName);
 
         stepDefs.result = stepDefs.mockMvc.perform(
-                        put("/roles/{id}", role.getId())
+                        put("/roles/{id}", (oldRole!=null ? oldRole.getId() : 0))
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content(stepDefs.mapper.writeValueAsString(role))
+                                .content(stepDefs.mapper.writeValueAsString(newRole))
                                 .characterEncoding(StandardCharsets.UTF_8)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
@@ -80,16 +80,16 @@ public class ManageRolesStepDefs {
     public void iDeleteTheRoleWithName(String roleName) throws Exception {
         Role role = roleRepository.findByName(roleName);
 
-        stepDefs.mockMvc.perform(
-                        delete("/roles/{id}", role.getId())
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        delete("/roles/{id}", (role!=null ? role.getId() : 0))
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
     }
 
-    @Then("The response code is {int}")
-    public void theResponseCodeIs(int statusCode) throws Exception {
-        stepDefs.result.andExpect(status().is(statusCode));
+    @And("There are {int} roles")
+    public void thereAreRoles(int count) {
+        assert(roleRepository.count() == count);
     }
 }
