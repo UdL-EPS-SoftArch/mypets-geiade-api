@@ -8,8 +8,9 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface PetRepository extends CrudRepository<Pet, Long>, PagingAndSortingRepository<Pet, Long> {
-    Pet findByName(@Param("name") String name);
 
+    Pet findPetById(@Param("id") Long id);
+    Pet findByName(@Param("name") String name);
     Pet findByChip(@Param("chip") String name);
 
 }
