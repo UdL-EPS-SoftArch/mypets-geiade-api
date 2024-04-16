@@ -8,11 +8,16 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import static java.lang.Long.parseLong;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 public class StepRegisterAdoption {
 
@@ -59,9 +64,22 @@ public class StepRegisterAdoption {
             if (!pet.isAdopted()) {
                 Adoptions adoptions = new Adoptions();
                 adoptions.setPet(pet);
-                userRepository.findById(username).ifPresent(user -> adoptions.setUser(user));
+                userRepository.findById(username).ifPresent(adoptions::setUser);
                 pet.setAdopted(true);
                 petRepository.save(pet);
+
+                try {
+                    stepDefs.result = stepDefs.mockMvc.perform(
+                                    post("/adoptions")
+                                            .contentType(MediaType.APPLICATION_JSON)
+                                            .content(stepDefs.mapper.writeValueAsString(adoptions))
+                                            .characterEncoding(StandardCharsets.UTF_8)
+                                            .accept(MediaType.APPLICATION_JSON)
+                                            .with(AuthenticationStepDefs.authenticate()))
+                            .andDo(print());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
