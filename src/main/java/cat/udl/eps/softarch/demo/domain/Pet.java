@@ -48,7 +48,6 @@ public class Pet extends UriEntity<Long> {
     private Adoptions adoptions;
     
     @ManyToOne
-    @NotNull
     @JsonIdentityReference(alwaysAsId = true)
     private Shelter shelter;
 
