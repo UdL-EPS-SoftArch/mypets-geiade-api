@@ -8,21 +8,21 @@ Feature: Register an Adoption
     Given There is a registered user with username "username2" and password "password2" and email "email2@gmail.com"
 
   Scenario: User successfully adopts a Pet
-    And I can login with username "username" and password "password"
-    Given The Pet with id 1 exists
-    Given The Pet with id 1 is not adopted
-    When The user with username "username" adopts the Pet with id 1
-    Then The Pet with id 1 should be marked as adopted
+    Given I can login with username "username" and password "password"
+    Given There is a registered pet with name "cat", date of birth "10-10-2023", isAdopted False, colour "white", sex "male", chip "1234", race "european", isDangerous False, at the shelter named "shelter1"
+    Given The Pet with chip "1234" is not adopted
+    When The user with username "username" adopts the Pet with chip "1234"
+    Then The Pet with chip "1234" should be marked as adopted
 
   Scenario: User tries to adopt a Pet that is already adopted
-    And I can login with username "username" and password "password"
-    And The Pet with id 1 exists
-    And The Pet with id 1 is adopted by user "username2"
-    When The user with username "username" adopts the Pet with id 1
-    Then The system should display an error message indicating the Pet with id 1 is already adopted by another user "username2"
+    Given I can login with username "username" and password "password"
+    Given There is a registered pet with name "super_cat", date of birth "01-01-2024", isAdopted True, colour "black", sex "male", chip "1234", race "european", isDangerous False, at the shelter named "shelter1"
+    Given The Pet with chip "1234" is adopted by user "username2"
+    When The user with username "username" adopts the Pet with chip "1234"
+    Then The system should display an error message indicating the Pet with chip "1234" is already adopted by another user "username2"
 
   Scenario: User tries to adopt a Pet that does not exist
-    And I can login with username "username" and password "password"
-    And The Pet with id 1 does not exists
-    When The user with username "username" adopts the Pet with id 1
-    Then The system should display an error message indicating the Pet with id 1 does not exist
+    Given I can login with username "username" and password "password"
+    Given The Pet with chip "9876" does not exists
+    When The user with username "username" adopts the Pet with chip "9876"
+    Then The system should display an error message indicating the Pet with chip "9876" does not exist

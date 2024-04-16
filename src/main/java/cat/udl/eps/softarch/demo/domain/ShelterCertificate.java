@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 public class ShelterCertificate {
     @OneToOne
-    @NotNull
     @JsonIdentityReference(alwaysAsId = true)
     private Shelter shelter;
 
@@ -21,7 +20,6 @@ public class ShelterCertificate {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
     private LocalDateTime expirationDate;
 
 }

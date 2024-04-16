@@ -16,12 +16,17 @@ import java.time.LocalDate;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Pet extends UriEntity<Long> {
+public class Pet extends UriEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique=true)
+    @NotBlank
+    private String chip;
+
+    @NotBlank
     private String name;
 
     private LocalDate dateOfBirth;
@@ -32,13 +37,11 @@ public abstract class Pet extends UriEntity<Long> {
 
     private Integer size;
 
-    private String chip;
-
     private String sex;
 
     private String race;
 
-    private boolean dangerous;
+    private boolean isDangerous;
 
     @OneToOne
     @JsonIdentityReference(alwaysAsId = true)
