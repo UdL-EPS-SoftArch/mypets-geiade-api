@@ -22,8 +22,6 @@ public class ScheduleStepDefs {
     @Autowired
     private ScheduleRepository scheduleRepository;
 
-    /*@Autowired
-    private ShelterRepository shelterRepository; falta aprovar PR Shelter Test*/
     public static String newResourceUri;
 
     @When("I create a new schedule with startTime \"([^\"]*)\" and endTime \"([^\"]*)\" for shelter \"([^\"]*)\"$")
@@ -34,12 +32,8 @@ public class ScheduleStepDefs {
         ZonedDateTime start = ZonedDateTime.parse(startTime);
         ZonedDateTime end = ZonedDateTime.parse(endTime);
 
-        if(start.compareTo(end) >= 0) schedule.setStartTime(null);
-        else {
-            schedule.setStartTime(start);
-            schedule.setEndTime(end);
-        }
-        //Shelter shelter1 = shelterRepository.getbyname... falta aprovar PR Shelter Test
+        schedule.setStartTime(start);
+        schedule.setEndTime(end);
 
         stepDefs.result = stepDefs.mockMvc.perform(
                         post("/schedules")

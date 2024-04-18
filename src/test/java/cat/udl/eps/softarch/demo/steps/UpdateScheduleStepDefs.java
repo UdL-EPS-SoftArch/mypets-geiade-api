@@ -60,11 +60,8 @@ public class UpdateScheduleStepDefs {
 
         Schedule schedule = scheduleRepository.findScheduleByStartTimeAndEndTime(existingStart, existingEnd);
         if (schedule != null) {
-            if (newStart != null) {
-                if (newStart.compareTo(newEnd) >= 0) schedule.setStartTime(null);
-                else schedule.setStartTime(newStart);
-            }
-            if (newEnd != null) schedule.setEndTime(newEnd);
+            schedule.setStartTime(newStart);
+            schedule.setEndTime(newEnd);
         }
 
 

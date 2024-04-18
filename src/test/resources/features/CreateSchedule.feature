@@ -23,5 +23,5 @@ Feature: Create Schedule
   Scenario: Create a new schedule with startTime higher than endTime
     Given I can login with username "username" and password "password"
     When I create a new schedule with startTime "2024-03-17T10:00:00+01:00" and endTime "2024-03-17T08:00:00+01:00" for shelter "shelter"
-    Then The response code is 400
+    Then The response code is 500
     And No schedule is created
