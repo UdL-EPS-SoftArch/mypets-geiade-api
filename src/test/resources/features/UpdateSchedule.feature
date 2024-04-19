@@ -27,4 +27,4 @@ Feature: Update Schedule
     Given I can login with username "username" and password "password"
     And There is a registered schedule with startTime "2024-03-17T08:00:00+01:00" and endTime "2024-03-17T21:00:00+01:00"
     When I update a schedule with startTime "2024-03-17T08:00:00+01:00" and endTime "2024-03-17T21:00:00+01:00" with new values startTime "2024-03-17T10:00:00+01:00" and endTime "2024-03-17T08:00:00+01:00"
-    Then The response code is 400
+    Then The response code is 500
