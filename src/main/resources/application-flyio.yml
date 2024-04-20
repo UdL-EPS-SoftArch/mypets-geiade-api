@@ -1,4 +1,4 @@
-allowed-origins: "https://angular-template.fly.dev, https://deploy-preview-*--angular-template.fly.dev"
+allowed-origins: "https://mypets-geiade.netlify.app, https://deploy-preview-*--mypets-geiade.netlify.app"
 
 logging:
     level:
