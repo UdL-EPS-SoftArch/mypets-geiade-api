@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = false)
-public class ShelterCertificate {
+public class ShelterCertificate extends UriEntity<Long> {
     @OneToOne
     @JsonIdentityReference(alwaysAsId = true)
     private Shelter shelter;
