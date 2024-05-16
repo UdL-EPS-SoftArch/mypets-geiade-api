@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = false)
-public class Location {
+public class Location extends UriEntity<Long> {
     @OneToOne
     /*@NotNull*/
     @JsonIdentityReference(alwaysAsId = true)
