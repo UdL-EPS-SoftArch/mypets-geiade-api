@@ -3,7 +3,6 @@ package cat.udl.eps.softarch.demo.domain;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -45,7 +44,7 @@ public class Pet extends UriEntity<Long> {
 
     @OneToOne
     @JsonIdentityReference(alwaysAsId = true)
-    private Adoptions adoptions;
+    private Adoption adoption;
     
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)

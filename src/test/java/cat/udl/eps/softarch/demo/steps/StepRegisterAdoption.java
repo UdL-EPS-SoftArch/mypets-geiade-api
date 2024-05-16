@@ -1,6 +1,6 @@
 package cat.udl.eps.softarch.demo.steps;
 import cat.udl.eps.softarch.demo.domain.*;
-import cat.udl.eps.softarch.demo.repository.AdoptionsRepository;
+import cat.udl.eps.softarch.demo.repository.AdoptionRepository;
 import cat.udl.eps.softarch.demo.repository.PetRepository;
 import cat.udl.eps.softarch.demo.repository.UserRepository;
 import io.cucumber.java.en.And;
@@ -28,7 +28,7 @@ public class StepRegisterAdoption {
     private PetRepository petRepository;
 
     @Autowired
-    private AdoptionsRepository adoptionsRepository;
+    private AdoptionRepository adoptionRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -48,9 +48,9 @@ public class StepRegisterAdoption {
     @Given("^The Pet with chip \"([^\"]*)\" is adopted by user \"([^\"]*)\"")
     public void isAdopted (String chip, String username) {
         Pet pet = petRepository.findByChip(chip);
-        Adoptions adoptions = new Adoptions();
-        userRepository.findById(username).ifPresent(user -> adoptions.setUser(user));
-        adoptions.setPet(pet);
+        Adoption adoption = new Adoption();
+        userRepository.findById(username).ifPresent(user -> adoption.setUser(user));
+        adoption.setPet(pet);
         petRepository.save(pet);
         assertTrue(pet.isAdopted());
     }
@@ -62,9 +62,9 @@ public class StepRegisterAdoption {
 
         if (pet != null) {
             if (!pet.isAdopted()) {
-                Adoptions adoptions = new Adoptions();
-                adoptions.setPet(pet);
-                userRepository.findById(username).ifPresent(adoptions::setUser);
+                Adoption adoption = new Adoption();
+                adoption.setPet(pet);
+                userRepository.findById(username).ifPresent(adoption::setUser);
                 pet.setAdopted(true);
                 petRepository.save(pet);
 
@@ -72,7 +72,7 @@ public class StepRegisterAdoption {
                     stepDefs.result = stepDefs.mockMvc.perform(
                                     post("/adoptions")
                                             .contentType(MediaType.APPLICATION_JSON)
-                                            .content(stepDefs.mapper.writeValueAsString(adoptions))
+                                            .content(stepDefs.mapper.writeValueAsString(adoption))
                                             .characterEncoding(StandardCharsets.UTF_8)
                                             .accept(MediaType.APPLICATION_JSON)
                                             .with(AuthenticationStepDefs.authenticate()))
@@ -93,7 +93,7 @@ public class StepRegisterAdoption {
     @Then("^The system should display an error message indicating the Pet with chip \"([^\"]*)\" is already adopted by another user \"([^\"]*)\"")
     public void petAlreadyAdopted(String chip, String username){
         Pet pet = petRepository.findByChip(chip);
-        Optional<Adoptions> adoptions = adoptionsRepository.findById(parseLong("1"));
+        Optional<Adoption> adoptions = adoptionRepository.findById(parseLong("1"));
         adoptions.ifPresent(adoption -> {
             User user = adoption.getUser();
             Optional<User> opt = userRepository.findById(username);
