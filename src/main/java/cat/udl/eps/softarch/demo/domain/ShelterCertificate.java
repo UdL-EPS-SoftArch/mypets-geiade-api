@@ -21,5 +21,4 @@ public class ShelterCertificate extends UriEntity<Long> {
     private Long id;
 
     private LocalDateTime expirationDate;
-
 }

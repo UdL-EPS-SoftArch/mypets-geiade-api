@@ -51,7 +51,7 @@ class Location {
  postalCode: Integer
 }
 
-class ShelterCertificate {
+class ShelterCertificate extends UriEntity {
   id: Long
   expirationDate: DateTime
 }
