@@ -1,12 +1,11 @@
 package cat.udl.eps.softarch.demo.steps;
 
-import cat.udl.eps.softarch.demo.domain.Adoptions;
-import cat.udl.eps.softarch.demo.repository.AdoptionsRepository;
+import cat.udl.eps.softarch.demo.domain.Adoption;
+import cat.udl.eps.softarch.demo.repository.AdoptionRepository;
 import cat.udl.eps.softarch.demo.repository.PetRepository;
 import cat.udl.eps.softarch.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.http.MediaType;
@@ -29,7 +28,7 @@ public class StepUpdateAdoption {
     private PetRepository petRepository;
 
     @Autowired
-    private AdoptionsRepository adoptionsRepository;
+    private AdoptionRepository adoptionRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -37,19 +36,19 @@ public class StepUpdateAdoption {
     @When("^Update the adoption with id (\\d+) User with username \"([^\"]*)\"$")
     public void updateAdoptionUsername(int adoption_id, String final_username) {
         Long id_adoption = (long) adoption_id;
-        Optional<Adoptions> opt = adoptionsRepository.findById(id_adoption);
+        Optional<Adoption> opt = adoptionRepository.findById(id_adoption);
 
-        opt.ifPresent(adoptions -> {
+        opt.ifPresent(adoption -> {
 
             userRepository.findById(final_username).ifPresent(user -> {
-                adoptions.setUser(user);
-                adoptions.setDateOfAdoption(LocalDateTime.now());
+                adoption.setUser(user);
+                adoption.setDateOfAdoption(LocalDateTime.now());
             });
             try {
                 stepDefs.result = stepDefs.mockMvc.perform(
-                                patch("/adoptions/{id}", adoptions.getId())
+                                patch("/adoptions/{id}", adoption.getId())
                                         .contentType(MediaType.APPLICATION_JSON)
-                                        .content(stepDefs.mapper.writeValueAsString(adoptions))
+                                        .content(stepDefs.mapper.writeValueAsString(adoption))
                                         .characterEncoding(StandardCharsets.UTF_8)
                                         .accept(MediaType.APPLICATION_JSON)
                                         .with(AuthenticationStepDefs.authenticate()))
@@ -64,10 +63,10 @@ public class StepUpdateAdoption {
     @Then("^The adoption with id (\\d+) should have been updated to username \"([^\"]*)\"")
     public void theAdoptionUserForThePetWithIdShouldBeUpdatedToUsername(int id_int, String username) {
         Long id = (long) id_int;
-        Optional<Adoptions> opt = adoptionsRepository.findById(id);
+        Optional<Adoption> opt = adoptionRepository.findById(id);
 
-        opt.ifPresent(adoptions -> {
-            userRepository.findById(username).ifPresent(user -> assertEquals(user, adoptions.getUser()));
+        opt.ifPresent(adoption -> {
+            userRepository.findById(username).ifPresent(user -> assertEquals(user, adoption.getUser()));
         });
     }
 
@@ -75,12 +74,12 @@ public class StepUpdateAdoption {
     @And("^The adoption with id (\\d+) dateofAdoption is updated")
     public void theAdoptionDateofAdoptionIsUpdated(int adoption_id) {
         Long id = (long) adoption_id;
-        Optional<Adoptions> opt = adoptionsRepository.findById(id);
+        Optional<Adoption> opt = adoptionRepository.findById(id);
 
-        opt.ifPresent(adoptions -> {
-            assertEquals(adoptions.getDateOfAdoption().getDayOfMonth(), LocalDateTime.now().getDayOfMonth());
-            assertEquals(adoptions.getDateOfAdoption().getMonth(), LocalDateTime.now().getMonth());
-            assertEquals(adoptions.getDateOfAdoption().getYear(), LocalDateTime.now().getYear());
+        opt.ifPresent(adoption -> {
+            assertEquals(adoption.getDateOfAdoption().getDayOfMonth(), LocalDateTime.now().getDayOfMonth());
+            assertEquals(adoption.getDateOfAdoption().getMonth(), LocalDateTime.now().getMonth());
+            assertEquals(adoption.getDateOfAdoption().getYear(), LocalDateTime.now().getYear());
         });
     }
 
