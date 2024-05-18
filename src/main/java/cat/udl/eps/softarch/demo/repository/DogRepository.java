@@ -12,6 +12,6 @@ import java.util.List;
 public interface DogRepository extends CrudRepository<Dog, Long>, PagingAndSortingRepository<Dog, Long> {
 
     List<Dog> findByName(@Param("name") String name);
-    List<Dog> findByChip(@Param("chip") String name);
+    List<Dog> findByChip(@Param("chip") String chip);
 
 }

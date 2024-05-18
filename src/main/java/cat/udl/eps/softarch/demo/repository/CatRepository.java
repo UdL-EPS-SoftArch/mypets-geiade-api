@@ -12,6 +12,6 @@ import java.util.List;
 public interface CatRepository extends CrudRepository<Cat, Long>, PagingAndSortingRepository<Cat, Long> {
 
     List<Cat> findByName(@Param("name") String name);
-    List<Cat> findByChip(@Param("chip") String name);
+    List<Cat> findByChip(@Param("chip") String chip);
 
 }
