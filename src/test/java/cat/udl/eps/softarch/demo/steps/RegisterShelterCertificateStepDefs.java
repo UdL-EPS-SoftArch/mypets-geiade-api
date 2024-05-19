@@ -33,7 +33,6 @@ public class RegisterShelterCertificateStepDefs {
     @When("I register a new shelter certificate with id \"([^\"]*)\" for shelter with name \"([^\"]*)\"$")
     public void iRegisterANewShelterCertificateWithIdForShelterWithName(Long id, String shelterName) throws Exception {
         ShelterCertificate shelterCertificate = new ShelterCertificate();
-        shelterCertificate.setId(id);
 
         Shelter shelter = shelterRepository.findByName(shelterName);
         shelterCertificate.setShelter(shelter);
@@ -67,7 +66,6 @@ public class RegisterShelterCertificateStepDefs {
     @Given("^There is a registered shelter certificate with id \"([^\"]*)\" for shelter with name \"([^\"]*)\"$")
     public void thereIsARegisteredShelterCertificateWithIdForShelterWithName(Long id, String shelterName) {
         ShelterCertificate shelterCertificate = new ShelterCertificate();
-        shelterCertificate.setId(id);
 
         Shelter shelter = shelterRepository.findByName(shelterName);
         shelterCertificate.setShelter(shelter);
